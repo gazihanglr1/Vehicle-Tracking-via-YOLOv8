@@ -1,95 +1,56 @@
-<div align="center">
+# Real-time Vehicle Tracking and Counting using YOLO + OpenCV
 
-# 🚦 RoadSight Pro
+## Project Overview
 
-### Real-Time Vehicle Detection, Classification, Tracking & Counting
+This project uses **YOLO11** for real-time vehicle detection, tracking, and counting. It detects vehicles (cars, trucks, buses, motorcycles, and bicycles) from a video stream, tracks their movements across frames, and counts how many vehicles of each type are detected — with automatic correction for class-label flickering between frames.
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![YOLO](https://img.shields.io/badge/Model-YOLO11-00FFFF.svg)](https://docs.ultralytics.com/models/yolo11/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)](https://opencv.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+The system works by processing each frame of the video, identifying vehicles, assigning them persistent track IDs, and keeping a running per-class count in real time.
 
-<br>
+## 📊 Sample Traffic Video
 
-<img src="assets/sample_tracking.png" alt="Sample Tracking Output" width="720"/>
+`PLACEHOLDER — test video file name, e.g. test5.mp4`
 
-</div>
+`PLACEHOLDER — link to sample input video`
 
----
+## 🧠 AI Model (YOLO11)
 
-## Overview
+The model used for vehicle detection is **YOLO11** (`yolo11n.pt` by default, configurable via `--model`). It detects and classifies vehicles into the following classes: car, truck, bus, motorcycle, and bicycle.
 
-A CLI tool for real-time vehicle detection, classification, tracking, and per-class counting using YOLO11 and ByteTrack. Handles track-ID class flickering to keep counts accurate, and supports headless execution for servers and Colab.
+👉 `PLACEHOLDER — link to your trained/downloaded model weights, if hosted separately`
 
-**Features:**
-- Per-class confidence thresholds
-- ByteTrack-based tracking with class-flicker reconciliation
-- Accurate per-class unique vehicle counting
-- Bounded trail history (memory-safe on long videos)
-- Headless mode (no display required)
-- JSON/CSV result export
-- Fully configurable via CLI
+## 🛠️ How It Works
 
----
+1. **Video Input:** A video file is processed frame by frame.
+2. **Vehicle Detection:** YOLO11 detects vehicles within each frame, applying per-class confidence thresholds.
+3. **Tracking & Counting:** ByteTrack assigns each detected vehicle a persistent ID across frames. If a track's predicted class changes between frames, the count is reconciled so the same vehicle is never counted twice under two classes.
 
-## Demo
+## 💻 Tech Stack
 
-<div align="center">
+- **Python:** YOLO11, OpenCV, NumPy
+- **AI Model:** Ultralytics YOLO11
+- **Tracking:** ByteTrack
+- **Vehicle Counting:** Custom logic based on track IDs and reconciled class labels
+- **Libraries:** `cv2`, `ultralytics`, `numpy`, `tqdm`
 
-| Detection + Tracking | Counting Overlay |
-|:---:|:---:|
-| <img src="assets/tracking_demo.gif" width="380"/> | <img src="assets/counting_overlay.png" width="380"/> |
+## 🚀 How to Run
 
-</div>
-
----
-
-## Results
-
-| Metric | Value |
-|---|---|
-| Avg. FPS (GPU) | `PLACEHOLDER` |
-| Avg. FPS (CPU) | `PLACEHOLDER` |
-| Test video length | `PLACEHOLDER` |
-| Total vehicles counted | `PLACEHOLDER` |
-
----
-
-## Installation
-
+1. Install Python libraries:
 ```bash
-git clone https://github.com/YOUR_USERNAME/roadsight-pro.git
-cd roadsight-pro
 pip install -r requirements.txt
 ```
 
----
+2. Place your input video in the project folder.
 
-## Usage
-
+3. Run the script:
 ```bash
-# Local run with display
 python vehicle_tracker.py --video test5.mp4 --model yolo11n.pt
-
-# Headless (Colab / server)
-python vehicle_tracker.py --video test5.mp4 --headless --export-format json
-
-# Force GPU
-python vehicle_tracker.py --video test5.mp4 --device cuda:0
 ```
 
-| Argument | Description | Default |
-|---|---|---|
-| `--video` | Input video path (required) | — |
-| `--model` | YOLO model path/name | `yolo11n.pt` |
-| `--output` | Output video path | `output.mp4` |
-| `--conf` | Global confidence override | per-class |
-| `--headless` | Run without display window | `False` |
-| `--device` | `cuda:0` / `cpu` | auto |
-| `--export-format` | `json` / `csv` / `none` | `json` |
-| `--export-dir` | Export directory | `results` |
+4. The output will be saved as `output.mp4` and displayed in a window showing vehicle tracking and counts (use `--headless` to skip the display window).
 
----
+**Sample Output**
+
+`PLACEHOLDER — link or embedded preview of output_demo.mp4`
 
 ## Project Structure
 
@@ -100,38 +61,9 @@ roadsight-pro/
 ├── PROJECT_REPORT.md
 ├── requirements.txt
 ├── LICENSE
-├── .gitignore
-├── results/
-└── assets/
+└── .gitignore
 ```
-
----
-
-## Roadmap
-
-- [ ] Line-crossing / zone-based counting
-- [ ] Speed estimation
-- [ ] RTSP / live stream support
-- [ ] Unit tests
-- [ ] Docker image
-
----
-
-## References
-
-- [Ultralytics YOLO11 Documentation](https://docs.ultralytics.com/models/yolo11/)
-- Zhang, Y. et al. *ByteTrack: Multi-Object Tracking by Associating Every Detection Box*, 2022.
-
----
 
 ## License
 
 [MIT](LICENSE)
-
----
-
-<div align="center">
-
-**`PLACEHOLDER — Your Name / GitHub / LinkedIn`**
-
-</div>
